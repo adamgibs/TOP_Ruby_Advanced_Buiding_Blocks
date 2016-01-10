@@ -13,4 +13,24 @@ def bubble_sort(array)
 	end
 	array
 end
-p bubble_sort([4,32,6,5,4]) 
+
+def bubble_sort_by(array)
+	swapped = true
+	while swapped
+		swapped = false
+		n = array.length - 2
+		for i in 0..n do
+			y = yield(array[i], array[i + 1]) 
+			if y > 0
+				array[i], array[i + 1] = array[i + 1], array[i]
+				swapped = true
+			end
+			
+		end
+	end
+	array
+end
+puts bubble_sort_by(["hi", "hello", "hey"]) do |left, right|
+	left.length - right.length
+end
+
