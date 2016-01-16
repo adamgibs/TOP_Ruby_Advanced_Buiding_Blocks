@@ -62,14 +62,27 @@ module Enumerable
 		c
 	end
 
-	def my_map?
+	def my_map
+		array = []
+		self.my_each{|i| array << yield(i)}
+		array
+
 	end
 
-	def my_inject
+	
+	def my_inject(initial = nil)
+		initial = self[0] if initial.nil?
+		memo = initial
+		self.my_each { |element| memo = yield(memo, element) }
+		memo}
 	end
 
 
 
 end
 
-p [1,3,4,7].my_none? {|i| i % 2 == 0}
+
+
+p [1,3,4,7].my_inject do |sum, i| 
+	sum + i
+end
